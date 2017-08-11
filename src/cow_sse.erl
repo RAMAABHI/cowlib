@@ -28,11 +28,6 @@
 -type state() :: #state{}.
 -export_type([state/0]).
 
--type event() :: #{
-	last_event_id := binary(),
-	event_type := binary(),
-	data := iolist()
-}.
 
 -spec init() -> state().
 init() ->
@@ -40,8 +35,6 @@ init() ->
 
 %% @todo Add a function to retrieve the retry value from the state.
 
--spec parse(binary(), state())
-	-> {event, event(), State} | {more, State}.
 parse(Data0, State=#state{state_name=bom, buffer=Buffer}) ->
 	Data1 = case Buffer of
 		<<>> -> Data0;
